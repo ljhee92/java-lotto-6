@@ -21,7 +21,7 @@ public class GameController {
         validator = new Validator();
     } // GameController
 
-    public void startGame() {
+    public void playGame() {
         purchaseLotto();
         WinningNumber winningNumber = inputWinningNumber();
         BonusNumber bonusNumber = inputBonusNumber(winningNumber);
