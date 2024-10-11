@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import lotto.domain.LottoMachine;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.WinningNumber;
@@ -14,11 +15,13 @@ public class GameController {
     private final OutputView outputView;
     private final InputView inputView;
     private final Validator validator;
+    private final LottoMachine lottoMachine;
 
     public GameController() {
         outputView = new OutputView();
         inputView = new InputView();
         validator = new Validator();
+        lottoMachine = new LottoMachine();
     } // GameController
 
     public void playGame() {
@@ -35,7 +38,7 @@ public class GameController {
             int quantity = validator.getValidQuantity(inputAmount);
             outputView.displayNewLine();
             outputView.displayMessage(quantity + "개를 구매했습니다.");
-            List<Lotto> createdLotto = createLotto(quantity);
+            List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
 
             for (Lotto lotto : createdLotto) {
                 outputView.displayMessage(lotto.toString());
@@ -45,18 +48,6 @@ public class GameController {
             purchaseLotto();
         } // end catch
     } // purchaseLotto
-
-    public List<Lotto> createLotto(int quantity) {
-        List<Lotto> lotto = new ArrayList<>();
-        List<Integer> numbers;
-
-        for (int i = 0; i < quantity; i++) {
-            numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-            lotto.add(new Lotto(numbers));
-        } // end for
-
-        return lotto;
-    } // createLotto
 
     public WinningNumber inputWinningNumber() {
         outputView.displayNewLine();
