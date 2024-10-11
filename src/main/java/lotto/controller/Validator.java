@@ -25,9 +25,9 @@ public class Validator {
 
     public WinningNumber getValidWinningNumber(String inputWinningNumber) {
         List<Integer> winningNumber = new ArrayList<>();
-        String[] inputWinnigNumbers = inputWinningNumber.trim().split(",");
+        String[] inputWinningNumbers = inputWinningNumber.trim().split(",");
 
-        for (String number : inputWinnigNumbers) {
+        for (String number : inputWinningNumbers) {
             winningNumber.add(Integer.parseInt(number));
         } // end for
 
