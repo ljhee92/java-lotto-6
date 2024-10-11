@@ -1,19 +1,26 @@
 package lotto.model;
 
 public class BonusNumber {
-    private final int bonusNumber;
-    private final WinningNumber winningNumber;
+    private final String bonusNumber;
 
-    public BonusNumber(int bonusNumber, WinningNumber winningNumber) {
+    public BonusNumber(String bonusNumber, WinningNumber winningNumber) {
         validate(bonusNumber, winningNumber);
         this.bonusNumber = bonusNumber;
-        this.winningNumber = winningNumber;
     } // BonusNumber
 
-    private void validate(int bonusNumber, WinningNumber winningNumber) {
-        checkBetweenOneAndFourtyFive(bonusNumber);
-        checkDupilicate(bonusNumber, winningNumber);
+    private void validate(String bonusNumber, WinningNumber winningNumber) {
+        checkOnlyOneNumber(bonusNumber);
+
+        int number = Integer.parseInt(bonusNumber);
+        checkBetweenOneAndFourtyFive(number);
+        checkDupilicate(number, winningNumber);
     } // validate
+
+    private void checkOnlyOneNumber(String bonusNumber) {
+        if (!bonusNumber.matches("[1-9]{1,2}$")) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자 1개만 입력 가능합니다.");
+        } // end if
+    } // checkOnlyOneNumber
 
     private void checkBetweenOneAndFourtyFive(int bonusNumber) {
         if (!(bonusNumber >= 1 && bonusNumber <= 45)) {

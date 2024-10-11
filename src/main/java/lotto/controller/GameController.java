@@ -4,6 +4,7 @@ import lotto.domain.LottoMachine;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.WinningNumber;
+import lotto.validator.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,20 +13,20 @@ import java.util.List;
 public class GameController {
     private final OutputView outputView;
     private final InputView inputView;
-    private final Validator validator;
+    private final InputValidator inputValidator;
     private final LottoMachine lottoMachine;
 
     public GameController() {
         outputView = new OutputView();
         inputView = new InputView();
-        validator = new Validator();
+        inputValidator = new InputValidator();
         lottoMachine = new LottoMachine();
     } // GameController
 
     public void playGame() {
         purchaseLotto();
-        WinningNumber winningNumber = inputWinningNumber();
-        BonusNumber bonusNumber = inputBonusNumber(winningNumber);
+        WinningNumber winningNumber = getWinningNumber();
+        BonusNumber bonusNumber = getBonusNumber(winningNumber);
     } // startGame
 
     public void purchaseLotto() {
@@ -33,7 +34,7 @@ public class GameController {
         String inputAmount = inputView.inputMessage();
 
         try {
-            int quantity = validator.getValidQuantity(inputAmount);
+            int quantity = inputValidator.getValidQuantity(inputAmount);
             outputView.displayNewLine();
             outputView.displayMessage(quantity + "개를 구매했습니다.");
             List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
@@ -47,32 +48,32 @@ public class GameController {
         } // end catch
     } // purchaseLotto
 
-    public WinningNumber inputWinningNumber() {
+    public WinningNumber getWinningNumber() {
         outputView.displayNewLine();
         outputView.displayMessage("당첨 번호를 입력해주세요.");
         String inputWinningNumber = inputView.inputMessage();
         WinningNumber winningNumber = null;
 
         try {
-            winningNumber = validator.getValidWinningNumber(inputWinningNumber);
+            winningNumber = inputValidator.getValidWinningNumber(inputWinningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
-            inputWinningNumber();
+            getWinningNumber();
         } // end catch
         return winningNumber;
     } // inputWinningNumber
 
-    public BonusNumber inputBonusNumber(WinningNumber winningNumber) {
+    public BonusNumber getBonusNumber(WinningNumber winningNumber) {
         outputView.displayNewLine();
         outputView.displayMessage("보너스 번호를 입력해주세요.");
         String inputBonusNumber = inputView.inputMessage();
         BonusNumber bonusNumber = null;
 
         try {
-            bonusNumber = validator.getValidBonusNumber(inputBonusNumber, winningNumber);
+            bonusNumber = inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
-            inputBonusNumber(winningNumber);
+            getBonusNumber(winningNumber);
         } // end catch
         return bonusNumber;
     } // inputBonusNumber
