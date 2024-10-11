@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.validator;
 
 import lotto.model.BonusNumber;
 import lotto.model.WinningNumber;
@@ -6,8 +6,7 @@ import lotto.model.WinningNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Validator {
-
+public class InputValidator {
     public int getValidQuantity(String inputAmount) {
         if (!inputAmount.matches("^[0-9]*$")) {
             throw new IllegalArgumentException("[ERROR] 구입금액은 숫자만 입력해야 합니다.");
@@ -35,10 +34,6 @@ public class Validator {
     } // getValidWinningNumber
 
     public BonusNumber getValidBonusNumber(String inputBonusNumber, WinningNumber winningNumber) {
-        if (!inputBonusNumber.matches("[1-9]{1,2}$")) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자 1개만 입력 가능합니다.");
-        } // end if
-
-        return new BonusNumber(Integer.parseInt(inputBonusNumber), winningNumber);
+        return new BonusNumber(inputBonusNumber, winningNumber);
     } // getValidBonusNumber
 } // class
