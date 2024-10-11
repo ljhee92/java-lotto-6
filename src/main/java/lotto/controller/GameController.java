@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.LottoMachine;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
@@ -8,7 +7,6 @@ import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
