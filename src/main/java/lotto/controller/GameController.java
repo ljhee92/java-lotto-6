@@ -51,8 +51,8 @@ public class GameController {
     public WinningNumber getWinningNumber() {
         outputView.requestWinningNumber();
         String inputWinningNumber = inputReader.inputMessage();
-        WinningNumber winningNumber = null;
 
+        WinningNumber winningNumber = null;
         try {
             winningNumber = inputValidator.getValidWinningNumber(inputWinningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {

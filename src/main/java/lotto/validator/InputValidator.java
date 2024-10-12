@@ -1,25 +1,25 @@
 package lotto.validator;
 
 import lotto.model.BonusNumber;
+import lotto.model.Money;
 import lotto.model.WinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputValidator {
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+
     public int getValidQuantity(String inputAmount) {
-        if (!inputAmount.matches("^[0-9]*$")) {
+        Matcher matcher = NUMBER_PATTERN.matcher(inputAmount);
+        if (!matcher.matches()) {
             throw new IllegalArgumentException("[ERROR] 구입금액은 숫자만 입력해야 합니다.");
         } // end if
 
-        int purchaseAmount = Integer.parseInt(inputAmount);
-        int quantity = purchaseAmount / 1000;
-
-        if (purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 1,000원 단위로 입력해야 합니다.");
-        } // end if
-
-        return quantity;
+        int amount = Integer.parseInt(inputAmount);
+        return new Money(amount).getQuantity();
     } // validAmount
 
     public WinningNumber getValidWinningNumber(String inputWinningNumber) {
