@@ -5,20 +5,20 @@ import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.WinningNumber;
 import lotto.validator.InputValidator;
-import lotto.view.InputView;
+import lotto.view.InputReader;
 import lotto.view.OutputView;
 
 import java.util.List;
 
 public class GameController {
     private final OutputView outputView;
-    private final InputView inputView;
+    private final InputReader inputReader;
     private final InputValidator inputValidator;
     private final LottoMachine lottoMachine;
 
     public GameController() {
         outputView = new OutputView();
-        inputView = new InputView();
+        inputReader = new InputReader();
         inputValidator = new InputValidator();
         lottoMachine = new LottoMachine();
     } // GameController
@@ -30,49 +30,47 @@ public class GameController {
     } // startGame
 
     public void purchaseLotto() {
-        outputView.displayMessage("구입금액을 입력해 주세요.");
-        String inputAmount = inputView.inputMessage();
+        outputView.requestAmount();
+        String inputAmount = inputReader.inputMessage();
 
         try {
             int quantity = inputValidator.getValidQuantity(inputAmount);
-            outputView.displayNewLine();
-            outputView.displayMessage(quantity + "개를 구매했습니다.");
+            outputView.displayAmount(quantity);
+
             List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
 
             for (Lotto lotto : createdLotto) {
-                outputView.displayMessage(lotto.toString());
+                outputView.displayPurchasedLotto(lotto);
             } // end for
         } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(illegalArgumentException.getMessage());
+            outputView.displayErrorMessage(illegalArgumentException.getMessage());
             purchaseLotto();
         } // end catch
     } // purchaseLotto
 
     public WinningNumber getWinningNumber() {
-        outputView.displayNewLine();
-        outputView.displayMessage("당첨 번호를 입력해주세요.");
-        String inputWinningNumber = inputView.inputMessage();
+        outputView.requestWinningNumber();
+        String inputWinningNumber = inputReader.inputMessage();
         WinningNumber winningNumber = null;
 
         try {
             winningNumber = inputValidator.getValidWinningNumber(inputWinningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(illegalArgumentException.getMessage());
+            outputView.displayErrorMessage(illegalArgumentException.getMessage());
             getWinningNumber();
         } // end catch
         return winningNumber;
     } // inputWinningNumber
 
     public BonusNumber getBonusNumber(WinningNumber winningNumber) {
-        outputView.displayNewLine();
-        outputView.displayMessage("보너스 번호를 입력해주세요.");
-        String inputBonusNumber = inputView.inputMessage();
+        outputView.requestBonusNumber();
+        String inputBonusNumber = inputReader.inputMessage();
         BonusNumber bonusNumber = null;
 
         try {
             bonusNumber = inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(illegalArgumentException.getMessage());
+            outputView.displayErrorMessage(illegalArgumentException.getMessage());
             getBonusNumber(winningNumber);
         } // end catch
         return bonusNumber;
