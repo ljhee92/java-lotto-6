@@ -38,10 +38,7 @@ public class GameController {
             outputView.displayAmount(quantity);
 
             List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
-
-            for (Lotto lotto : createdLotto) {
-                outputView.displayPurchasedLotto(lotto);
-            } // end for
+            createdLotto.forEach(outputView::displayPurchasedLotto);
         } catch (IllegalArgumentException illegalArgumentException) {
             outputView.displayErrorMessage(illegalArgumentException.getMessage());
             purchaseLotto();
