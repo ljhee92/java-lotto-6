@@ -4,10 +4,11 @@ import lotto.model.BonusNumber;
 import lotto.model.Money;
 import lotto.model.WinningNumber;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
@@ -23,12 +24,9 @@ public class InputValidator {
     } // validAmount
 
     public WinningNumber getValidWinningNumber(String inputWinningNumber) {
-        List<Integer> winningNumber = new ArrayList<>();
-        String[] inputWinningNumbers = inputWinningNumber.trim().split(",");
-
-        for (String number : inputWinningNumbers) {
-            winningNumber.add(Integer.parseInt(number));
-        } // end for
+        List<Integer> winningNumber = Arrays.stream(inputWinningNumber.replaceAll(" ", "").split(","))
+                                            .map(Integer::parseInt)
+                                            .collect(Collectors.toList());
 
         return new WinningNumber(winningNumber);
     } // getValidWinningNumber
