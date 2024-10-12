@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class InputValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+    private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("[1-9]{1,2}$*");
 
     public int getValidQuantity(String inputAmount) {
         Matcher matcher = NUMBER_PATTERN.matcher(inputAmount);
@@ -32,6 +33,11 @@ public class InputValidator {
     } // getValidWinningNumber
 
     public BonusNumber getValidBonusNumber(String inputBonusNumber, WinningNumber winningNumber) {
-        return new BonusNumber(inputBonusNumber, winningNumber);
+        Matcher matcher = BONUS_NUMBER_PATTERN.matcher(inputBonusNumber);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자 1개만 입력 가능 합니다.");
+        } // end if
+
+        return new BonusNumber(Integer.parseInt(inputBonusNumber), winningNumber);
     } // getValidBonusNumber
 } // class

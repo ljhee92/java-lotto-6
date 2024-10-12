@@ -19,6 +19,10 @@ public class WinningNumber {
         LOTTO_VALIDATOR.checkDupilicate(numbers);
     } // validate
 
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    } // contains
+
     public List<Integer> getNumbers() {
         return numbers;
     } // getNumbers

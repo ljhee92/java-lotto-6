@@ -1,26 +1,17 @@
 package lotto.model;
 
 public class BonusNumber {
-    private final String bonusNumber;
+    private final int bonusNumber;
 
-    public BonusNumber(String bonusNumber, WinningNumber winningNumber) {
+    public BonusNumber(int bonusNumber, WinningNumber winningNumber) {
         validate(bonusNumber, winningNumber);
         this.bonusNumber = bonusNumber;
     } // BonusNumber
 
-    private void validate(String bonusNumber, WinningNumber winningNumber) {
-        checkOnlyOneNumber(bonusNumber);
-
-        int number = Integer.parseInt(bonusNumber);
-        checkBetweenOneAndFourtyFive(number);
-        checkDupilicate(number, winningNumber);
+    private void validate(int bonusNumber, WinningNumber winningNumber) {
+        checkBetweenOneAndFourtyFive(bonusNumber);
+        checkDupilicate(bonusNumber, winningNumber);
     } // validate
-
-    private void checkOnlyOneNumber(String bonusNumber) {
-        if (!bonusNumber.matches("[1-9]{1,2}$")) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자 1개만 입력 가능합니다.");
-        } // end if
-    } // checkOnlyOneNumber
 
     private void checkBetweenOneAndFourtyFive(int bonusNumber) {
         if (!(bonusNumber >= 1 && bonusNumber <= 45)) {
@@ -29,8 +20,12 @@ public class BonusNumber {
     } // checkBetweenOneAndFourtyFive
 
     private void checkDupilicate(int bonusNumber, WinningNumber winningNumber) {
-        if (winningNumber.getNumbers().contains(bonusNumber)) {
+        if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 로또 번호와 중복되지 않는 숫자여야 합니다.");
         } // end if
     } // checkDuplicate
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    } // getBonusNumber
 } // class
