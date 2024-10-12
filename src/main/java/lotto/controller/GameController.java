@@ -55,8 +55,8 @@ public class GameController {
     public BonusNumber getBonusNumber(WinningNumber winningNumber) {
         outputView.requestBonusNumber();
         String inputBonusNumber = inputReader.inputMessage();
-        BonusNumber bonusNumber = null;
 
+        BonusNumber bonusNumber = null;
         try {
             bonusNumber = inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
