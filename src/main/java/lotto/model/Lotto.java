@@ -26,6 +26,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.toString();
+            return numbers.toString();
     } // toString
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    } // getNumbers
 } // class

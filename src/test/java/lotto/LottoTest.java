@@ -37,19 +37,19 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호가 1~45 사이의 숫자로 생성되는지 확인한다.")
     void createLottoByOneToFourtyFive() {
-        assertThat(new LottoMachine().createLotto()).allMatch(number -> number >= 1 && number <= 45);
+        assertThat(new LottoMachine().createLotto().getNumbers()).allMatch(number -> number >= 1 && number <= 45);
     }
 
     @Test
     @DisplayName("로또 번호의 개수가 6개인지 확인한다.")
     void createLottoBySixCount() {
-        assertThat(new LottoMachine().createLotto()).hasSize(6);
+        assertThat(new LottoMachine().createLotto().getNumbers()).hasSize(6);
     }
 
     @Test
     @DisplayName("로또 번호가 중복되지 않는지 확인한다.")
     void createLottoByNotDuplicate() {
-        assertThat(new LottoMachine().createLotto()).doesNotHaveDuplicates();
+        assertThat(new LottoMachine().createLotto().getNumbers()).doesNotHaveDuplicates();
     }
 
     @Test
