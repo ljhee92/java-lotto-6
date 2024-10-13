@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.validator.LottoValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
@@ -22,6 +23,12 @@ public class WinningNumber {
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
     } // contains
+
+    public int countMatchNumbers(Lotto lotto) {
+        List<Integer> intersection = new ArrayList<>(lotto.getNumbers());
+        intersection.retainAll(numbers);
+        return intersection.size();
+    }
 
     public List<Integer> getNumbers() {
         return List.copyOf(numbers);

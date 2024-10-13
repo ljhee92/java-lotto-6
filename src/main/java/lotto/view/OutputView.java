@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.Result;
+import lotto.util.Rank;
 
 public class OutputView {
     private static final OutputWriter OUTPUT_WRITER = new OutputWriter();
@@ -30,5 +32,12 @@ public class OutputView {
     public void requestBonusNumber() {
         OUTPUT_WRITER.displayNewLine();
         OUTPUT_WRITER.displayMessage("보너스 번호를 입력해주세요.");
+    }
+
+    public void displayResult(Result result) {
+        OUTPUT_WRITER.displayNewLine();
+        OUTPUT_WRITER.displayMessage("당첨 통계");
+        OUTPUT_WRITER.displayMessage("---");
+        OUTPUT_WRITER.displayMessage(result.toString());
     }
 } // class

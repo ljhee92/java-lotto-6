@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoMachine;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
+import lotto.model.Result;
 import lotto.model.WinningNumber;
 import lotto.validator.InputValidator;
 import lotto.view.InputReader;
@@ -26,9 +27,11 @@ public class GameController {
 
     public void playGame() {
         int quantity = repeatUntilValid(this::purchaseLotto);
-        issueLotto(quantity);
+        List<Lotto> issuedLotto = issueLotto(quantity);
         WinningNumber winningNumber = repeatUntilValid(this::getWinningNumber);
         BonusNumber bonusNumber = getBonusNumber(winningNumber);
+        Result result = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
+        outputView.displayResult(result);
     } // startGame
 
     public int purchaseLotto() {
@@ -41,9 +44,10 @@ public class GameController {
         return quantity;
     } // purchaseLotto
 
-    public void issueLotto(int quantity) {
+    public List<Lotto> issueLotto(int quantity) {
         List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
         createdLotto.forEach(outputView::displayPurchasedLotto);
+        return createdLotto;
     } // issueLotto
 
     public WinningNumber getWinningNumber() {

@@ -25,6 +25,10 @@ public class BonusNumber {
         } // end if
     } // checkDuplicate
 
+    public boolean matchesBonusNumber(Lotto lotto) {
+        return lotto.contains(bonusNumber);
+    }
+
     public int getBonusNumber() {
         return bonusNumber;
     } // getBonusNumber

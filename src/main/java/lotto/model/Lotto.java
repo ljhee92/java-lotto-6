@@ -24,6 +24,10 @@ public class Lotto {
         numbers.sort(Integer::compareTo);
     } // sort
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    } // contains
+
     @Override
     public String toString() {
             return numbers.toString();
