@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class InputValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
-    private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("[1-9]{1,2}$*");
+    private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("^[0-9]{1,2}$");
 
     public int getValidQuantity(String inputAmount) {
         Matcher matcher = NUMBER_PATTERN.matcher(inputAmount);
