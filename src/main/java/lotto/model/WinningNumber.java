@@ -24,6 +24,6 @@ public class WinningNumber {
     } // contains
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return List.copyOf(numbers);
     } // getNumbers
 } // class
