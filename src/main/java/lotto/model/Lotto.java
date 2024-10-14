@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.validator.LottoValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -10,8 +11,8 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        sort(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
+        sort();
     } // Lotto
 
     private void validate(List<Integer> numbers) {
@@ -20,7 +21,7 @@ public class Lotto {
         LOTTO_VALIDATOR.checkDupilicate(numbers);
     } // validate
 
-    private void sort(List<Integer> numbers) {
+    private void sort() {
         numbers.sort(Integer::compareTo);
     } // sort
 
