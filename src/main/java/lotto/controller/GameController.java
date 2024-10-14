@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoMachine;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
-import lotto.model.Result;
+import lotto.model.WinningResult;
 import lotto.model.WinningNumber;
 import lotto.validator.InputValidator;
 import lotto.view.InputReader;
@@ -28,8 +28,8 @@ public class GameController {
         WinningNumber winningNumber = repeatUntilValid(this::getWinningNumber);
         BonusNumber bonusNumber = getBonusNumber(winningNumber);
 
-        Result result = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
-        OutputView.displayResult(result);
+        WinningResult winningResult = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
+        OutputView.displayResult(winningResult);
     } // startGame
 
     public int purchaseLotto() {

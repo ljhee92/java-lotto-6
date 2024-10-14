@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
-import lotto.model.Result;
+import lotto.model.WinningResult;
 
 public class OutputView {
 
@@ -32,10 +32,10 @@ public class OutputView {
         OutputWriter.displayMessage("보너스 번호를 입력해주세요.");
     }
 
-    public static void displayResult(Result result) {
+    public static void displayResult(WinningResult winningResult) {
         OutputWriter.displayNewLine();
         OutputWriter.displayMessage("당첨 통계");
         OutputWriter.displayMessage("---");
-        OutputWriter.displayMessage(result.toString());
+        OutputWriter.displayMessage(winningResult.toString());
     }
 } // class
