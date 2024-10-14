@@ -2,6 +2,7 @@ package lotto.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.model.*;
+import lotto.util.Limit;
 import lotto.util.Rank;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class LottoMachine {
     } // createLotto
 
     public Lotto createLotto() {
-        return new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        return new Lotto(Randoms.pickUniqueNumbersInRange(Limit.MIN_NUMBER, Limit.MAX_NUMBER, Limit.LOTTO_SIZE));
     } // createLotto
 
     public WinningResult compareResult(List<Lotto> issuedLotto, WinningNumber winningNumber, BonusNumber bonusNumber) {
