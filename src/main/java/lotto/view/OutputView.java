@@ -4,39 +4,38 @@ import lotto.model.Lotto;
 import lotto.model.Result;
 
 public class OutputView {
-    private static final OutputWriter OUTPUT_WRITER = new OutputWriter();
 
-    public void requestAmount() {
-        OUTPUT_WRITER.displayMessage("구입금액을 입력해 주세요.");
+    public static void requestAmount() {
+        OutputWriter.displayMessage("구입금액을 입력해 주세요.");
     }
 
-    public void displayAmount(int quantity) {
-        OUTPUT_WRITER.displayNewLine();
-        OUTPUT_WRITER.displayMessage(quantity + "개를 구매했습니다.");
+    public static void displayAmount(int quantity) {
+        OutputWriter.displayNewLine();
+        OutputWriter.displayMessage(quantity + "개를 구매했습니다.");
     }
 
-    public void displayPurchasedLotto(Lotto lotto) {
-        OUTPUT_WRITER.displayMessage(lotto.toString());
+    public static void displayPurchasedLotto(Lotto lotto) {
+        OutputWriter.displayMessage(lotto.toString());
     }
 
-    public void displayErrorMessage(String errerMessage) {
-        OUTPUT_WRITER.displayMessage(errerMessage);
+    public static void displayErrorMessage(String errerMessage) {
+        OutputWriter.displayMessage(errerMessage);
     }
 
-    public void requestWinningNumber() {
-        OUTPUT_WRITER.displayNewLine();
-        OUTPUT_WRITER.displayMessage("당첨 번호를 입력해주세요.");
+    public static void requestWinningNumber() {
+        OutputWriter.displayNewLine();
+        OutputWriter.displayMessage("당첨 번호를 입력해주세요.");
     }
 
-    public void requestBonusNumber() {
-        OUTPUT_WRITER.displayNewLine();
-        OUTPUT_WRITER.displayMessage("보너스 번호를 입력해주세요.");
+    public static void requestBonusNumber() {
+        OutputWriter.displayNewLine();
+        OutputWriter.displayMessage("보너스 번호를 입력해주세요.");
     }
 
-    public void displayResult(Result result) {
-        OUTPUT_WRITER.displayNewLine();
-        OUTPUT_WRITER.displayMessage("당첨 통계");
-        OUTPUT_WRITER.displayMessage("---");
-        OUTPUT_WRITER.displayMessage(result.toString());
+    public static void displayResult(Result result) {
+        OutputWriter.displayNewLine();
+        OutputWriter.displayMessage("당첨 통계");
+        OutputWriter.displayMessage("---");
+        OutputWriter.displayMessage(result.toString());
     }
 } // class

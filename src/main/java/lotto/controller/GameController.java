@@ -13,14 +13,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class GameController {
-    private final OutputView outputView;
-    private final InputReader inputReader;
     private final InputValidator inputValidator;
     private final LottoMachine lottoMachine;
 
     public GameController() {
-        outputView = new OutputView();
-        inputReader = new InputReader();
         inputValidator = new InputValidator();
         lottoMachine = new LottoMachine();
     } // GameController
@@ -33,40 +29,40 @@ public class GameController {
         BonusNumber bonusNumber = getBonusNumber(winningNumber);
 
         Result result = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
-        outputView.displayResult(result);
+        OutputView.displayResult(result);
     } // startGame
 
     public int purchaseLotto() {
-        outputView.requestAmount();
-        String inputAmount = inputReader.inputMessage();
+        OutputView.requestAmount();
+        String inputAmount = InputReader.inputMessage();
 
         int quantity = inputValidator.getValidQuantity(inputAmount);
-        outputView.displayAmount(quantity);
+        OutputView.displayAmount(quantity);
 
         return quantity;
     } // purchaseLotto
 
     public List<Lotto> issueLotto(int quantity) {
         List<Lotto> createdLotto = lottoMachine.createLottos(quantity);
-        createdLotto.forEach(outputView::displayPurchasedLotto);
+        createdLotto.forEach(OutputView::displayPurchasedLotto);
         return createdLotto;
     } // issueLotto
 
     public WinningNumber getWinningNumber() {
-        outputView.requestWinningNumber();
-        String inputWinningNumber = inputReader.inputMessage();
+        OutputView.requestWinningNumber();
+        String inputWinningNumber = InputReader.inputMessage();
         return inputValidator.getValidWinningNumber(inputWinningNumber);
     } // inputWinningNumber
 
     public BonusNumber getBonusNumber(WinningNumber winningNumber) {
-        outputView.requestBonusNumber();
-        String inputBonusNumber = inputReader.inputMessage();
+        OutputView.requestBonusNumber();
+        String inputBonusNumber = InputReader.inputMessage();
 
         BonusNumber bonusNumber = null;
         try {
             bonusNumber = inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
         } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.displayErrorMessage(illegalArgumentException.getMessage());
+            OutputView.displayErrorMessage(illegalArgumentException.getMessage());
             getBonusNumber(winningNumber);
         } // end catch
         return bonusNumber;
@@ -76,7 +72,7 @@ public class GameController {
         try {
             return function.get();
         } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.displayErrorMessage(illegalArgumentException.getMessage());
+            OutputView.displayErrorMessage(illegalArgumentException.getMessage());
             return repeatUntilValid(function);
         } // end catch
     } // repeatUntilValid
