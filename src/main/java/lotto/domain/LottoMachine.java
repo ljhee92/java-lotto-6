@@ -19,7 +19,7 @@ public class LottoMachine {
         return new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
     } // createLotto
 
-    public Result compareResult(List<Lotto> issuedLotto, WinningNumber winningNumber, BonusNumber bonusNumber) {;
+    public Result compareResult(List<Lotto> issuedLotto, WinningNumber winningNumber, BonusNumber bonusNumber) {
         Result result = new Result();
         issuedLotto.forEach(lotto -> {result.updateResult(Rank.of(lotto, winningNumber, bonusNumber));});
         return result;

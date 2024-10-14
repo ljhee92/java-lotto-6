@@ -28,8 +28,10 @@ public class GameController {
     public void playGame() {
         int quantity = repeatUntilValid(this::purchaseLotto);
         List<Lotto> issuedLotto = issueLotto(quantity);
+
         WinningNumber winningNumber = repeatUntilValid(this::getWinningNumber);
         BonusNumber bonusNumber = getBonusNumber(winningNumber);
+
         Result result = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
         outputView.displayResult(result);
     } // startGame
