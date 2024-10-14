@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.util.ErrorMessage;
+import lotto.util.Limit;
+
 public class Money {
     private final int amount;
     private final int quantity;
@@ -11,13 +14,13 @@ public class Money {
     } // Money
 
     private void validate(int amount) {
-        if (amount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 1,000원 단위로 입력해야 합니다.");
+        if (amount % Limit.AMOUNT_UNIT != 0) {
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_MUST_BE_DIVIDE_INTO_1000);
         } // end if
     } // validate
 
     private int setQuantity() {
-        return amount / 1000;
+        return amount / Limit.AMOUNT_UNIT;
     } // setQuantity
 
     public int getQuantity() {

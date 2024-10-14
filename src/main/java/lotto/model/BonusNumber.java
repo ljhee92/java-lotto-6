@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.util.ErrorMessage;
+import lotto.util.Limit;
+
 public class BonusNumber {
     private final int bonusNumber;
 
@@ -14,14 +17,14 @@ public class BonusNumber {
     } // validate
 
     private void checkBetweenOneAndFourtyFive(int bonusNumber) {
-        if (!(bonusNumber >= 1 && bonusNumber <= 45)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+        if (!(bonusNumber >= Limit.MIN_NUMBER && bonusNumber <= Limit.MAX_NUMBER)) {
+            throw new IllegalArgumentException(ErrorMessage.BONUS_MUST_BE_BETWEEN_ONE_AND_FOURTYFIVE);
         } // end if
     } // checkBetweenOneAndFourtyFive
 
     private void checkDupilicate(int bonusNumber, WinningNumber winningNumber) {
         if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 로또 번호와 중복되지 않는 숫자여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.BONUS_MUST_NOT_BE_DUPLICATE_OF_LOTTO);
         } // end if
     } // checkDuplicate
 

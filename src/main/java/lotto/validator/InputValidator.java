@@ -3,6 +3,7 @@ package lotto.validator;
 import lotto.model.BonusNumber;
 import lotto.model.Money;
 import lotto.model.WinningNumber;
+import lotto.util.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ public class InputValidator {
     public int getValidQuantity(String inputAmount) {
         Matcher matcher = NUMBER_PATTERN.matcher(inputAmount);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 숫자만 입력해야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_MUST_BE_NUMBER);
         } // end if
 
         int amount = Integer.parseInt(inputAmount);
@@ -35,7 +36,7 @@ public class InputValidator {
     public BonusNumber getValidBonusNumber(String inputBonusNumber, WinningNumber winningNumber) {
         Matcher matcher = BONUS_NUMBER_PATTERN.matcher(inputBonusNumber);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자 1개만 입력 가능 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.BONUS_MUST_BE_ONLY_ONE_NUMBER);
         } // end if
 
         return new BonusNumber(Integer.parseInt(inputBonusNumber), winningNumber);

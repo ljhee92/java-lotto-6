@@ -1,11 +1,13 @@
 package lotto.model;
 
+import lotto.util.Limit;
+
 public class Profit {
     private final int amount;
     private final WinningResult winningResult;
 
     public Profit(int quantity, WinningResult winningResult) {
-        this.amount = quantity * 1000;
+        this.amount = quantity * Limit.AMOUNT_UNIT;
         this.winningResult = winningResult;
     } // Profit
 
