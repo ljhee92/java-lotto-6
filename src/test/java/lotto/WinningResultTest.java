@@ -19,9 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WinningResultTest {
-    WinningNumber winningNumber;
-    BonusNumber bonusNumber;
-    LottoMachine lottoMachine;
+    private WinningNumber winningNumber;
+    private BonusNumber bonusNumber;
+    private LottoMachine lottoMachine;
 
     @BeforeEach
     void init() {
