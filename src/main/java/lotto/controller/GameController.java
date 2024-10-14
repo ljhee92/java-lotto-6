@@ -1,10 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
-import lotto.model.BonusNumber;
-import lotto.model.Lotto;
-import lotto.model.WinningResult;
-import lotto.model.WinningNumber;
+import lotto.model.*;
 import lotto.validator.InputValidator;
 import lotto.view.InputReader;
 import lotto.view.OutputView;
@@ -29,7 +26,8 @@ public class GameController {
         BonusNumber bonusNumber = getBonusNumber(winningNumber);
 
         WinningResult winningResult = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
-        OutputView.displayResult(winningResult);
+        double profit = lottoMachine.calculateProfit(quantity, winningResult);
+        OutputView.displayResult(winningResult, profit);
     } // startGame
 
     public int purchaseLotto() {

@@ -1,10 +1,7 @@
 package lotto.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import lotto.model.BonusNumber;
-import lotto.model.Lotto;
-import lotto.model.WinningResult;
-import lotto.model.WinningNumber;
+import lotto.model.*;
 import lotto.util.Rank;
 
 import java.util.List;
@@ -25,4 +22,9 @@ public class LottoMachine {
             winningResult.updateResult(Rank.of(lotto, winningNumber, bonusNumber));});
         return winningResult;
     } // compareResult
+
+    public double calculateProfit(int quantity, WinningResult winningResult) {
+        Profit profit = new Profit(quantity, winningResult);
+        return profit.calculateProfit();
+    } // calculateProfit
 } // class

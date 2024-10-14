@@ -25,6 +25,11 @@ public class WinningResult {
         return result.get(rank);
     } // getRank
 
+    public int getWinningMoney() {
+        return Stream.of(Rank.values())
+                .mapToInt(rank -> rank.getWinningMoney() * result.get(rank)).sum();
+    } // getWinningMoney
+
     @Override
     public String toString() {
         return Stream.of(Rank.values())

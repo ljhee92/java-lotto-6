@@ -5,6 +5,10 @@ public class OutputWriter {
         System.out.println(message);
     } // displayMessage
 
+    public static void displayMessageByFormat(String format, String message) {
+        System.out.printf(format, message);
+    } // displayMessageByFormat
+
     public static void displayNewLine() {
         System.out.println("");
     } // displayNewLine
