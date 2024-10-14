@@ -21,6 +21,10 @@ public class Result {
         result.put(rank, result.get(rank) + 1);
     }
 
+    public int getRank(Rank rank) {
+        return result.get(rank);
+    }
+
     @Override
     public String toString() {
         return Stream.of(Rank.values())
