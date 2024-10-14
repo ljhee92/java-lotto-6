@@ -29,20 +29,20 @@ public enum Rank {
     public static Rank of(Lotto lotto, WinningNumber winningNumber, BonusNumber bonusNumber) {
         return Rank.of(winningNumber.countMatchNumbers(lotto),
                 bonusNumber.matchesBonusNumber(lotto));
-    }
+    } // of
 
     public static Rank of(int matchedNumbersCount, boolean matchesBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchedNumbersCount == matchedNumbersCount
                                 && rank.matchesBonusNumber == matchesBonusNumber)
                 .findAny().orElse(MISS);
-    }
+    } // of
 
     public String getMessage() {
         return message;
-    }
+    } // getMessage
 
     public int getWinningMoney() {
         return winningMoney;
-    }
+    } // getWinningMoney
 } // enum

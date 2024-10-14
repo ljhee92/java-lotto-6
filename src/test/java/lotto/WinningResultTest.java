@@ -28,14 +28,14 @@ public class WinningResultTest {
         winningNumber = new WinningNumber(List.of(1, 2, 3, 7, 8, 9));
         bonusNumber = new BonusNumber(10, winningNumber);
         lottoMachine = new LottoMachine();
-    }
+    } // init
 
     @ParameterizedTest(name = "{index} : {2}")
     @DisplayName("3개, 4개, 5개, 5개+보너스볼, 6개 일치 개수 확인")
     @MethodSource("generateLottoData")
     void testCount(List<Lotto> lottos, Rank rank, String message, int output) {
         assertThat(lottoMachine.compareResult(lottos, winningNumber, bonusNumber).getRank(rank)).isEqualTo(output);
-    }
+    } // testCount
 
     public Stream<Arguments> generateLottoData() {
         return Stream.of(
@@ -49,5 +49,5 @@ public class WinningResultTest {
                 Arguments.of(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                                 new Lotto(List.of(1, 2, 3, 7, 8, 9))), Rank.FIRST, "6개 일치-1개", 1)
         );
-    }
+    } // generateLottoData
 } // class

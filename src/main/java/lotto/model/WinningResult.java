@@ -14,7 +14,7 @@ public class WinningResult {
         result = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
-        }
+        } // end for
     } // WinningResult
 
     public void updateResult(Rank rank) {

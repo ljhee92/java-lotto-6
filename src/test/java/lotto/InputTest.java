@@ -29,28 +29,28 @@ public class InputTest {
     @DisplayName("구입금액이 1000원 단위로 나누어 떨어지는지")
     void canDivideByOneThousand() {
         assertThat(inputValidator.getValidQuantity("2000")).isEqualTo(2);
-    }
+    } // canDivideByOneThousand
 
     @Test
     @DisplayName("입력한 당첨번호가 1~45 사이의 숫자인지")
     void winningNumberIsBetweenOneAndFourtyFive() {
         assertThat(inputValidator.getValidWinningNumber("1, 2, 3, 4, 5, 6")
                 .getNumbers()).allMatch(number -> number >= 1 && number <= 45);
-    }
+    } // winningNumberIsBetweenOneAndFourtyFive
 
     @Test
     @DisplayName("입력한 당첨번호의 개수가 6개인지")
     void winningNumberIsSixCount() {
         assertThat(inputValidator.getValidWinningNumber("1, 2, 3, 4, 5, 6")
                 .getNumbers()).hasSize(6);
-    }
+    } // winningNumberIsSixCount
 
     @Test
     @DisplayName("입력한 당첨번호의 숫자가 중복되지 않는지")
     void winningNumberDoesNotDuplicate() {
         assertThat(inputValidator.getValidWinningNumber("1, 2, 3, 4, 5, 6")
                 .getNumbers()).doesNotHaveDuplicates();
-    }
+    } // winningNumberDoesNotDuplicate
 
     @Test
     @DisplayName("입력한 보너스 번호가 1~45 사이의 숫자인지")
@@ -58,7 +58,7 @@ public class InputTest {
         assertThat(inputValidator.getValidBonusNumber("7",
                                                     new WinningNumber(List.of(1, 2, 3, 4, 5, 6)))
                 .getBonusNumber()).isBetween(1, 45);
-    }
+    } // bonusNumberIsBetweenOneAndFourtyFive
 
     @Test
     @DisplayName("입력한 보너스 번호의 개수가 1개인지")
@@ -66,13 +66,13 @@ public class InputTest {
         assertThat(inputValidator.getValidBonusNumber("7",
                                                     new WinningNumber(List.of(1, 2, 3, 4, 5, 6)))
                 .getBonusNumber()).isNotNull();
-    }
+    } // bonusNumberIsOneCount
 
     @Test
     @DisplayName("입력한 보너스 번호와 당첨 번호가 중복되지 않는지")
     void bonusNumberDoesNotDuplicate() {
         assertThat(new WinningNumber(List.of(1, 2, 3, 4, 5, 6)).contains(7)).isFalse();
-    }
+    } // bonusNumberDoesNotDuplicate
 
     @ParameterizedTest(name = "{index} : {1}")
     @DisplayName("구입 금액 예외 테스트")
@@ -80,14 +80,14 @@ public class InputTest {
     void testPurchaseAmountException(String input, String message) {
         assertThatThrownBy(() -> inputValidator.getValidQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
+    } // testPurchaseAmountException
 
     public Stream<Arguments> generateAmountData() {
         return Stream.of(
                 Arguments.of("1000j", "숫자가 아닐 때"),
                 Arguments.of("1001", "1000으로 나누어 떨어지지 않을 때")
         );
-    }
+    } // generateAmountData
 
     @ParameterizedTest(name = "{index} : {1}")
     @DisplayName("당첨 번호 예외 테스트")
@@ -95,7 +95,7 @@ public class InputTest {
     void testWinningNumberException(String input, String Message) {
         assertThatThrownBy(() -> inputValidator.getValidWinningNumber(input))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
+    } // testWinningNumberException
 
     public Stream<Arguments> generateWinningNumberData() {
         return Stream.of(
@@ -104,7 +104,7 @@ public class InputTest {
                 Arguments.of("1, 2, 3, 4, 5", "숫자의 개수가 6개보다 적을 때"),
                 Arguments.of("1, 2, 3, 4, 5, 5", "중복될 때")
         );
-    }
+    } // generateWinningNumberData
 
     @ParameterizedTest(name = "{index} : {2}")
     @DisplayName("보너스 번호 예외 테스트")
@@ -112,7 +112,7 @@ public class InputTest {
     void testBonusNumberException(String inputBonusNumber, WinningNumber inputWinningNumber, String Message) {
         assertThatThrownBy(() -> inputValidator.getValidBonusNumber(inputBonusNumber, inputWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
+    } //testBonusNumberException
 
     public Stream<Arguments> generateBonusNumberData() {
         WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
@@ -123,5 +123,5 @@ public class InputTest {
                 Arguments.of("j", winningNumber, "숫자를 입력하지 않았을 때"),
                 Arguments.of("4", winningNumber, "당첨 번호와 중복될 때")
         );
-    }
+    } // generateBonusNumberData
 } // class

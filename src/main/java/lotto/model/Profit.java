@@ -7,7 +7,7 @@ public class Profit {
     public Profit(int quantity, WinningResult winningResult) {
         this.amount = quantity * 1000;
         this.winningResult = winningResult;
-    }
+    } // Profit
 
     public double calculateProfit() {
         int totalWinningMoney = winningResult.getWinningMoney();

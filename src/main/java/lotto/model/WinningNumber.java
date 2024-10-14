@@ -28,7 +28,7 @@ public class WinningNumber {
         List<Integer> intersection = new ArrayList<>(lotto.getNumbers());
         intersection.retainAll(numbers);
         return intersection.size();
-    }
+    } // countMatchNumbers
 
     public List<Integer> getNumbers() {
         return List.copyOf(numbers);
