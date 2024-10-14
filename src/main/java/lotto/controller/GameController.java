@@ -7,6 +7,7 @@ import lotto.view.InputReader;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class GameController {
@@ -23,7 +24,7 @@ public class GameController {
         List<Lotto> issuedLotto = issueLotto(quantity);
 
         WinningNumber winningNumber = repeatUntilValid(this::getWinningNumber);
-        BonusNumber bonusNumber = getBonusNumber(winningNumber);
+        BonusNumber bonusNumber = repeatUntilValidWithParameter(winningNumber, this::getBonusNumber);
 
         WinningResult winningResult = lottoMachine.compareResult(issuedLotto, winningNumber, bonusNumber);
         double profit = lottoMachine.calculateProfit(quantity, winningResult);
@@ -55,15 +56,7 @@ public class GameController {
     public BonusNumber getBonusNumber(WinningNumber winningNumber) {
         OutputView.requestBonusNumber();
         String inputBonusNumber = InputReader.inputMessage();
-
-        BonusNumber bonusNumber = null;
-        try {
-            bonusNumber = inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
-        } catch (IllegalArgumentException illegalArgumentException) {
-            OutputView.displayErrorMessage(illegalArgumentException.getMessage());
-            getBonusNumber(winningNumber);
-        } // end catch
-        return bonusNumber;
+        return inputValidator.getValidBonusNumber(inputBonusNumber, winningNumber);
     } // inputBonusNumber
 
     private <T> T repeatUntilValid(Supplier<T> function) {
@@ -74,4 +67,13 @@ public class GameController {
             return repeatUntilValid(function);
         } // end catch
     } // repeatUntilValid
+
+    private <T, R> R repeatUntilValidWithParameter(T input, Function<T, R> function) {
+        try {
+            return function.apply(input);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            OutputView.displayErrorMessage(illegalArgumentException.getMessage());
+            return repeatUntilValidWithParameter(input, function);
+        } // end catch
+    } // repeatUntilValidWithParameter
 } // class
