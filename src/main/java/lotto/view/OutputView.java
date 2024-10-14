@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Result;
-import lotto.util.Rank;
 
 public class OutputView {
     private static final OutputWriter OUTPUT_WRITER = new OutputWriter();
